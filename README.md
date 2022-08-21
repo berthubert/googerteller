@@ -12,7 +12,7 @@ make
 ## How to run:
 
 ```
-sudo tcpdump -n -l dst net 192.0.2.1/32 $(for a in $(jq .prefixes < goog.json  | grep ipv4Prefix | cut -f2 -d: | sed s/\"//g); do echo or dst net $a; done)  |  ./teller 
+sudo tcpdump -n -l dst net 192.0.2.1/32 $(for a in $(cat goog-prefixes.txt); do echo or dst net $a; done)  |  ./teller 
 ```
 
 And then cry.
