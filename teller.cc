@@ -23,7 +23,7 @@ int main()
     cerr<<"Error opening audio: "<<audio_object_strerror(ao, res)<<endl;
   }
 
-  std::atomic<int64_t> counter;
+  std::atomic<int64_t> counter = 0;
   auto player = [&]() {
     vector<int16_t> data;
     int ourcounter=0;
