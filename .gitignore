@@ -30,3 +30,10 @@
 *.exe
 *.out
 *.app
+teller
+
+# CMake Stuff
+CMakeCache.txt
+CMakeFiles
+Makefile
+cmake_install.cmake
