@@ -20,8 +20,20 @@ set(CMAKE_CXX_EXTENSIONS ON)
 #target_include_directories(support PUBLIC ext/powerblog/ext/simplesocket ext/powerblog/ext ext/fmt-7.1.3/include/)
 #target_link_libraries(support PUBLIC -lh2o-evloop -lssl -lcrypto Threads::Threads)
 
+add_library(pcaudiolib SHARED IMPORTED)
 add_executable(teller teller.cc )
-target_link_libraries(teller -lpcaudio -lpthread)
+if (APPLE)
+  set_target_properties(pcaudiolib PROPERTIES
+    IMPORTED_LOCATION "/usr/local/lib/libpcaudio.dylib"
+    INTERFACE_INCLUDE_DIRECTORIES "/usr/local/include"
+  )
+  target_include_directories(teller PUBLIC /usr/local/include/)
+else()
+  set_target_properties(pcaudiolib PROPERTIES
+    IMPORTED_LOCATION "/usr/local/lib/libpcaudio.so"
+  )  
+endif()
+target_link_libraries(teller pcaudiolib -lpthread)
 
 #enable_testing()
 #add_test(testname testrunner)
