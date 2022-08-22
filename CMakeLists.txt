@@ -21,7 +21,7 @@ set(CMAKE_CXX_EXTENSIONS ON)
 #target_link_libraries(support PUBLIC -lh2o-evloop -lssl -lcrypto Threads::Threads)
 
 add_executable(teller teller.cc )
-target_link_libraries(teller -lpcaudio)
+target_link_libraries(teller -lpcaudio -lpthread)
 
 #enable_testing()
 #add_test(testname testrunner)
