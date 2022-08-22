@@ -4,6 +4,8 @@ Audible feedback on just how much your browsing feeds into Google.
 
 By bert@hubertnet.nl / https://berthub.eu/
 
+Demo video [in this tweet](https://twitter.com/bert_hu_bert/status/1561466204602220544)
+
 ## How to compile
 
 You need a C++ compiler like `gcc-c++` and CMake for compiling the binary.
