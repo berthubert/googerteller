@@ -19,6 +19,14 @@ sudo tcpdump -n -l dst net 192.0.2.1/32 $(for a in $(cat goog-prefixes.txt); do 
 
 And then cry.
 
+## Problems
+If tcpdump complains about `Warning: Kernel filter failed: Cannot allocate memory`, try
+this first:
+
+```
+sudo sysctl net.core.optmem_max=204800
+```
+
 ## Data source
 The list of Google services IP addresses can be found on [this Google
 support page](https://support.google.com/a/answer/10026322?hl=en).

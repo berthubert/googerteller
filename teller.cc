@@ -36,6 +36,8 @@ int main()
           data.push_back(val);
         }
         ourcounter++;
+        if(counter - ourcounter > 1000)
+          ourcounter = counter;
       }
       else {
         for(int n=0; n < 150; ++n) {
