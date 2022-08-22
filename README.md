@@ -4,7 +4,7 @@ audible feedback on just how much your browsing feeds into google
 By bert@hubertnet.nl / https://berthub.eu/
 
 ## How to compile
-First install libpcaudio, then:
+First install libpcaudio (libpcaudio-dev), then:
 
 ```
 cmake .
