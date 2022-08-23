@@ -4,6 +4,9 @@ Audible feedback on just how much your browsing feeds into Google.
 
 By bert@hubertnet.nl / https://berthub.eu/
 
+Makes a little bit of noise any time your computer sends a packet to a
+Google service, which excludes Google Cloud users.
+
 Demo video [in this tweet](https://twitter.com/bert_hu_bert/status/1561466204602220544)
 
 ## How to compile
