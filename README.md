@@ -53,8 +53,8 @@ for a in $(cat goog-prefixes6.txt)
 do 
 	ipset add google-services6 $a
 done
-iptables -I OUTPUT -m set --match-set google-services dst -j NFLOG --nflog-group 20 
-ip6tables -I OUTPUT -m set --match-set google-services6 dst -j NFLOG --nflog-group 20 
+iptables -I OUTPUT -m set --match-set google-services dst -j NFLOG --nflog-group 20 --nflog-threshold 1
+ip6tables -I OUTPUT -m set --match-set google-services6 dst -j NFLOG --nflog-group 20 --nflog-threshold 1
 ```
 
 Then start as:
