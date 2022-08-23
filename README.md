@@ -25,8 +25,6 @@ make
 sudo tcpdump -n -l dst net 192.0.2.1/32 $(for a in $(cat goog-prefixes.txt); do echo or dst net $a; done)  |  ./teller 
 ```
 
-Replace `192.0.2.1` with the IP address of your default gateway (e.g. your Internet router).
-
 And then cry.
 
 ## Problems
