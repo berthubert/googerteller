@@ -46,3 +46,9 @@ support page](https://support.google.com/a/answer/10026322?hl=en).
 
 Note that this splits out Google services and Google cloud user IP
 addresses.
+
+## Macos
+You will need to install the pcaudio library:
+  https://github.com/espeak-ng/pcaudiolib#mac-os
+In turn this needs automake installed (from xcode or brew). With that it is standard install
+WIth libpcaudio in place, follow instructions above.
