@@ -61,6 +61,15 @@ Then start as:
 ```
 sudo tcpdump -i nflog:20 -ln | ./teller
 ```
+
+Or, to track a single process, fe `firefox`, start it and run:
+
+```shell
+sudo bpftrace netsendmsg.bt |
+    grep --line-buffered ^$(pgrep firefox) |
+    stdbuf -oL cut -f2 | ./cidr.py | ./teller
+```
+
 And cry.
 
 ## Data source

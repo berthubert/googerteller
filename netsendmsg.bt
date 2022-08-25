@@ -1,0 +1,12 @@
+#!/usr/bin/bpftrace
+#include <net/sock.h>
+
+kprobe:udp_sendmsg,
+kprobe:tcp_sendmsg
+{
+  $sk = (struct sock *)arg0;
+
+  $daddr = ntop($sk->__sk_common.skc_daddr);
+
+  printf("%-8d\t%s\t(%s)\n", pid, $daddr, comm);
+}
