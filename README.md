@@ -2,18 +2,23 @@
 
 Audible feedback on just how much your browsing feeds into Google.
 
-By bert@hubertnet.nl / https://berthub.eu/
+By bert@hubertnet.nl / https://berthub.eu/ 
 
 Makes a little bit of noise any time your computer sends a packet to a
 tracker or a Google service, which excludes Google Cloud users.
 
 Demo video [in this tweet](https://twitter.com/bert_hu_bert/status/1561466204602220544)
 
+[Blog post with more videos](https://berthub.eu/articles/posts/tracker-beeper/)
+
 ## How to compile
+This will currently only work on Unix derived systems (like Linux, OSX and
+FreeBSD). 
 
 You need a C++ compiler like `gcc-c++` and CMake for compiling the binary.
 
 You also need to install `libpcaudio` (`libpcaudio-dev` on Debian/Ubuntu, `pcaudiolib-devel` on Fedora/Red Hat).
+For OSX [this is a bit more work](https://github.com/espeak-ng/pcaudiolib#mac-os)
 
 Then run:
 
