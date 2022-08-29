@@ -20,7 +20,7 @@ You need a C++ compiler like `gcc-c++` and CMake for compiling the binary.
 You also need to install `libpcaudio` (`libpcaudio-dev` on Debian/Ubuntu, `pcaudiolib-devel` on Fedora/Red Hat).
 For OSX [this is a bit more work](https://github.com/espeak-ng/pcaudiolib#mac-os)
 
-Then run:
+Then do:
 
 ```
 cmake .
@@ -34,6 +34,13 @@ sudo tcpdump -nql | ./teller
 ```
 
 And cry.
+
+## Configuration
+Tracker data is read from `tracker.conf` which you should only edit if
+you've learned about more IP addresses for relevant trackers.
+
+In `teller.conf` you can edit for each tracker where the noise should end up
+(left or right channel), and what the frequency should be. 
 
 ## Data source
 The list of Google services IP addresses can be found on [this Google
