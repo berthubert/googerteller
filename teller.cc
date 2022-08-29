@@ -141,29 +141,51 @@ int main(int argc, char** argv)
       22:42:25.323984 IP 13.81.0.219.29601 > 10.0.0.3.32902: tcp 1186
       22:42:25.323997 IP 10.0.0.3.32902 > 13.81.0.219.29601: tcp 0
       22:42:25.327216 b0:95:75:c3:68:92 > ff:ff:ff:ff:ff:ff, RRCP-0x25 query
+
+      16:53:11.082416 IP6 2603:8000:ae00:d301:5636:9bff:fe27:6af6.59394 > 2001:41f0:782d:1::2.29603: tcp 0
+
     */
-    auto pos = line.find('>');
-    if(pos == string::npos)
-      continue;
-
-    auto pos2 = line.find('.', pos);
-    if(pos2 == string::npos) continue;
-    pos2 = line.find('.', pos2+1);
-    if(pos2 == string::npos) continue;
-    pos2 = line.find('.', pos2+1);
-    if(pos2 == string::npos) continue;
-    pos2 = line.find_first_of(".:", pos2+1);
-    if(pos2 == string::npos) continue;
-
-    line.resize(pos2);
-    string ip=line.substr(pos+2, pos2 - pos - 2);
-    //    cout<<&line.at(pos+2)<<endl;
-    if(tracksneg.lookup(&line.at(pos+2))) {
-      cout<<ip<<" negative match"<<endl;
+    if(line.find(" IP6 ") != string::npos) {
+      auto pos = line.find('>');
+      if(pos == string::npos)
+        continue;
+      auto pos2 = line.find('.', pos);
+      if(pos2 == string::npos) continue;
+      line.resize(pos2);
+      string ip = line.substr(pos+2, pos2 - pos - 2);
+      cout<<"IP is: '"<<ip<<"'\n";
+      if(tracksneg.lookup(&line.at(pos+2))) {
+        cout<<ip<<" negative match"<<endl;
+      }
+      else if(auto fptr = trackspos.lookup(&line.at(pos+2))) {
+        cout<<ip<<" match!"<<endl;
+        ((TrackerConf*)fptr)->counter++;
+      }
     }
-    else if(auto fptr = trackspos.lookup(&line.at(pos+2))) {
-      cout<<ip<<" match!"<<endl;
-      ((TrackerConf*)fptr)->counter++;
+    else { 
+      auto pos = line.find('>');
+      if(pos == string::npos)
+        continue;
+      
+      auto pos2 = line.find('.', pos);
+      if(pos2 == string::npos) continue;
+      pos2 = line.find('.', pos2+1);
+      if(pos2 == string::npos) continue;
+      pos2 = line.find('.', pos2+1);
+      if(pos2 == string::npos) continue;
+      pos2 = line.find_first_of(".:", pos2+1);
+      if(pos2 == string::npos) continue;
+      
+      line.resize(pos2);
+      string ip=line.substr(pos+2, pos2 - pos - 2);
+      //    cout<<&line.at(pos+2)<<endl;
+      if(tracksneg.lookup(&line.at(pos+2))) {
+        cout<<ip<<" negative match"<<endl;
+      }
+      else if(auto fptr = trackspos.lookup(&line.at(pos+2))) {
+        cout<<ip<<" match!"<<endl;
+        ((TrackerConf*)fptr)->counter++;
+      }
     }
 
   }
