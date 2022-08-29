@@ -13,7 +13,7 @@ Demo video [in this tweet](https://twitter.com/bert_hu_bert/status/1561466204602
 
 You need a C++ compiler like `gcc-c++` and CMake for compiling the binary.
 
-You also need to install `libpcaudio` (`libpcaudio-dev` on Debian/Ubuntu, `pcaudiolib-devel` on Fedora/Red Hat).
+You also need to install `libpcaudio` (`libpcaudio-dev` on Debian/Ubuntu, `pcaudiolib-devel` on Fedora/Red Hat, `pcaudiolib` on Arch/Manjaro).
 
 Then run:
 
