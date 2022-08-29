@@ -23,5 +23,12 @@ set(CMAKE_CXX_EXTENSIONS ON)
 add_executable(teller teller.cc ext/lpm.c)
 target_link_libraries(teller -lpcaudio -lpthread)
 
-#enable_testing()
-#add_test(testname testrunner)
+add_executable(testrunner testrunner.cc ext/lpm.c )
+target_link_libraries(testrunner -lpcaudio)
+
+enable_testing()
+add_test(testname testrunner)
+
+
+enable_testing()
+add_test(testname testrunner)
