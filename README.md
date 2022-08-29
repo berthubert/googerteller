@@ -50,3 +50,11 @@ sudo bpftrace netsendmsg.bt |
 ```
 
 And cry.
+
+## Dependencies
+This software gratefully builds on:
+
+ * [doctest](https://github.com/doctest/doctest) testing framework
+ * [lpm](https://github.com/rmind/liblpm) Longest Prefix Match library
+ * [Portable C Audio Library 1.2](https://github.com/espeak-ng/pcaudiolib) - which you need to install yourself
+ * tcpdump of course
