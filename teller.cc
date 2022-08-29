@@ -153,7 +153,7 @@ int main(int argc, char** argv)
       if(pos2 == string::npos) continue;
       line.resize(pos2);
       string ip = line.substr(pos+2, pos2 - pos - 2);
-      cout<<"IP is: '"<<ip<<"'\n";
+
       if(tracksneg.lookup(&line.at(pos+2))) {
         cout<<ip<<" negative match"<<endl;
       }
