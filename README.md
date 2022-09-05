@@ -11,6 +11,13 @@ Demo video [in this tweet](https://twitter.com/bert_hu_bert/status/1561466204602
 
 [Blog post with more videos](https://berthub.eu/articles/posts/tracker-beeper/)
 
+## Installing on OSX:
+```
+brew tap robertjakub/teller
+brew install --HEAD googerteller
+sudo tcpdump -nql | teller
+```
+
 ## How to compile
 This will currently only work on Unix derived systems (like Linux, OSX and
 FreeBSD). 

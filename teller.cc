@@ -7,6 +7,7 @@
 #include <pcaudiolib/audio.h>
 #include "ext/toml.hpp"
 #include "lpmwrapper.hh"
+#include "configs.hh"
 
 using namespace std;
 
@@ -73,12 +74,12 @@ int main(int argc, char** argv)
     {
       trackertbl = toml::parse_file("trackers.conf");
       conftbl = toml::parse_file("teller.conf");
-      //      std::cout << tbl << "\n";
     }
   catch (const toml::parse_error& err)
     {
       std::cerr << "Parsing failed:\n" << err << "\n";
-      return 1;
+      trackertbl = toml::parse(trackerstoml);
+      conftbl = toml::parse(tellertoml);
     }
 
   map<string, TrackerConf> trackerdb;
