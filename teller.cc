@@ -77,7 +77,7 @@ int main(int argc, char** argv)
     }
   catch (const toml::parse_error& err)
     {
-      std::cerr << "Parsing failed:\n" << err << "\n";
+      std::cerr << "Could not read configuration files, using built-in defaults" <<endl;
       trackertbl = toml::parse(trackerstoml);
       conftbl = toml::parse(tellertoml);
     }

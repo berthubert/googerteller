@@ -28,7 +28,7 @@ To then start the noise, enter:
 ```
 sudo tcpdump -nql | teller
 ```
-And it should work. For the last command, it will again ask you to enter your
+And it should work. For the last command, it may also again ask you to enter your
 password.
 
 ## How to compile
