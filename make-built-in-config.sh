@@ -1,4 +1,5 @@
 #!/bin/sh
+cd $1
 (
 echo \#pragma once
 echo 'constexpr char tellertoml[]=R"('

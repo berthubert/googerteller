@@ -11,7 +11,6 @@ set(CMAKE_CXX_EXTENSIONS ON)
 
 add_custom_target(Work ALL DEPENDS configs.hh)
 
-
 add_executable(teller teller.cc ext/lpm.c)
 target_link_libraries(teller -lpcaudio -lpthread)
 
@@ -23,7 +22,7 @@ add_test(testname testrunner)
 
 add_custom_command(
     OUTPUT   configs.hh
-    COMMAND  ./make-built-in-config.sh
+    COMMAND  ${CMAKE_CURRENT_SOURCE_DIR}/make-built-in-config.sh ${CMAKE_CURRENT_SOURCE_DIR}
     DEPENDS  teller.conf trackers.conf
 )
 
