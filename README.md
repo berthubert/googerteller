@@ -14,7 +14,8 @@ Demo video [in this tweet](https://twitter.com/bert_hu_bert/status/1561466204602
 ## Installing on OSX:
 If need be, install Homebrew via https://brew.sh/ as this will allow you to
 compile new software. To do so, copy paste the instruction under 'Install
-Homebrew' into the terminal app. This might take quite a while.
+Homebrew' into the terminal app ([Apple
+help](https://support.apple.com/guide/terminal/open-or-quit-terminal-apd5265185d-f365-44cb-8b09-71a064a42125/mac). This might take quite a while.
 
 Then run:
 ```
@@ -23,7 +24,6 @@ brew install --HEAD googerteller
 sudo tcpdump -nql | teller
 ```
 And it should work.
-
 
 ## How to compile
 This will currently only work on Unix derived systems (like Linux, OSX and
