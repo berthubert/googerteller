@@ -23,7 +23,8 @@ brew tap robertjakub/teller
 brew install --HEAD googerteller
 sudo tcpdump -nql | teller
 ```
-And it should work.
+And it should work. For the last command, it will ask you to enter your
+password.
 
 ## How to compile
 This will currently only work on Unix derived systems (like Linux, OSX and
