@@ -139,7 +139,7 @@ int main(int argc, char** argv)
   }
   string line;
   while(getline(cin, line)) {
-
+    string ip;
     /*
       22:42:25.323984 IP 13.81.0.219.29601 > 10.0.0.3.32902: tcp 1186
       22:42:25.323997 IP 10.0.0.3.32902 > 13.81.0.219.29601: tcp 0
@@ -155,17 +155,17 @@ int main(int argc, char** argv)
       auto pos2 = line.find('.', pos); // this misses out on IPv6 ICMP
       if(pos2 == string::npos) continue;
       line.resize(pos2);
-      string ip = line.substr(pos+2, pos2 - pos - 2);
-
-      if(auto fptr = tracksneg.lookup(ip.c_str())) {
-	auto ptr = (TrackerConf*)fptr;
-        cout<<ip<<" negative match ("<<ptr->name<<")"<<endl;
-      }
-      else if(auto fptr = trackspos.lookup(ip.c_str())) {
-	auto ptr = (TrackerConf*)fptr;
-        cout<<ip<<" match ("<<ptr->name<<")"<<endl;
-        ptr->counter++;
-      }
+      ip = line.substr(pos+2, pos2 - pos - 2);
+    }
+    else if(line.find("direct") ==0 ) { // ebpfscript output
+      auto pos = line.find('\t');
+      if(pos == string::npos)
+        continue;
+      auto pos2 = line.find('\t', pos+1);
+      if(pos2 == string::npos)
+        continue;
+      line.resize(pos2);
+      ip = line.substr(pos+1);
     }
     else { 
       auto pos = line.find('>');
@@ -182,8 +182,9 @@ int main(int argc, char** argv)
       if(pos2 == string::npos) continue;
       
       line.resize(pos2);
-      string ip=line.substr(pos+2, pos2 - pos - 2);
-
+      ip=line.substr(pos+2, pos2 - pos - 2);
+    }
+    if(!ip.empty()) {
       if(auto fptr = tracksneg.lookup(ip.c_str())) {
 	auto ptr = (TrackerConf*)fptr;
         cout<<ip<<" negative match ("<<ptr->name<<")"<<endl;
@@ -194,7 +195,6 @@ int main(int argc, char** argv)
         ptr->counter++;
       }
     }
-
   }
   sleep(1);
 }

@@ -6,7 +6,15 @@ kprobe:tcp_sendmsg
 {
   $sk = (struct sock *)arg0;
 
-  $daddr = ntop($sk->__sk_common.skc_daddr);
+  if($sk->__sk_common.skc_family==2) {
+    $daddr = ntop($sk->__sk_common.skc_daddr);
+  }
+  else if($sk->__sk_common.skc_family==10) {
+    $daddr = ntop($sk->__sk_common.skc_v6_daddr.in6_u.u6_addr8);
+  }
 
-  printf("%-8d\t%s\t(%s)\n", pid, $daddr, comm);
+  /* skc_v6_daddr, skc_family */
+
+  printf("direct\t%s\tpid%d\t%d\t%s\n", $daddr , pid, $sk->__sk_common.skc_family, comm);
 }
+

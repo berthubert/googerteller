@@ -72,13 +72,17 @@ addresses, so you must check both sets before determining something is in
 fact a Google service and not a Google customer.
 
 # To run on a single process on Linux
-
 Or, to track a single process, fe `firefox`, start it and run:
 
 ```shell
 sudo bpftrace netsendmsg.bt |
-    grep --line-buffered ^$(pgrep firefox) |
-    stdbuf -oL cut -f2 | ./cidr.py | ./teller
+    grep --line-buffered ^$(pgrep firefox) | ./teller
+```
+
+Or try:
+
+```shell
+sudo bpftrace netsendmsg.bt | grep --line-buffered -i chrome | ./teller
 ```
 
 And cry.
