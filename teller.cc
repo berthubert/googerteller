@@ -14,6 +14,7 @@ using namespace std;
 
 struct TrackerConf
 {
+  string name; // superfluous but makes life easier
   double freq{400};
   double balance{0.5}; // 0 is left, 1 is right
   std::atomic<int64_t> counter{0};
@@ -86,6 +87,7 @@ int main(int argc, char** argv)
   auto tellerarr = conftbl.as_table();
   for(const auto& t : *tellerarr) {
     auto& entry = trackerdb[(string)t.first];
+    entry.name = t.first;
     entry.balance =     conftbl[t.first]["balance"].value_or(0.5);
     entry.freq =     conftbl[t.first]["freq"].value_or(500);
     cout <<"Want to play sound for tracker "<<t.first<<", balance= "<<entry.balance<<" frequency = "<<entry.freq<<endl;
@@ -113,7 +115,7 @@ int main(int argc, char** argv)
       });
     }
     else {
-      cout<<"Not array?"<<endl;
+      cout<<"Not array, or empty"<<endl;
     }
     
     track = trackertbl[t.first]["negative"].as_array();
@@ -126,7 +128,7 @@ int main(int argc, char** argv)
       });
     }
     else {
-      cout<<"Negative "<<t.first<<" not array?"<<endl;
+      cout<<"Negative "<<t.first<<" not array, or empty"<<endl;
     }
   }
   
@@ -150,17 +152,19 @@ int main(int argc, char** argv)
       auto pos = line.find('>');
       if(pos == string::npos)
         continue;
-      auto pos2 = line.find('.', pos);
+      auto pos2 = line.find('.', pos); // this misses out on IPv6 ICMP
       if(pos2 == string::npos) continue;
       line.resize(pos2);
       string ip = line.substr(pos+2, pos2 - pos - 2);
 
-      if(tracksneg.lookup(&line.at(pos+2))) {
-        cout<<ip<<" negative match"<<endl;
+      if(auto fptr = tracksneg.lookup(ip.c_str())) {
+	auto ptr = (TrackerConf*)fptr;
+        cout<<ip<<" negative match ("<<ptr->name<<")"<<endl;
       }
-      else if(auto fptr = trackspos.lookup(&line.at(pos+2))) {
-        cout<<ip<<" match!"<<endl;
-        ((TrackerConf*)fptr)->counter++;
+      else if(auto fptr = trackspos.lookup(ip.c_str())) {
+	auto ptr = (TrackerConf*)fptr;
+        cout<<ip<<" match ("<<ptr->name<<")"<<endl;
+        ptr->counter++;
       }
     }
     else { 
@@ -179,13 +183,15 @@ int main(int argc, char** argv)
       
       line.resize(pos2);
       string ip=line.substr(pos+2, pos2 - pos - 2);
-      //    cout<<&line.at(pos+2)<<endl;
-      if(tracksneg.lookup(&line.at(pos+2))) {
-        cout<<ip<<" negative match"<<endl;
+
+      if(auto fptr = tracksneg.lookup(ip.c_str())) {
+	auto ptr = (TrackerConf*)fptr;
+        cout<<ip<<" negative match ("<<ptr->name<<")"<<endl;
       }
-      else if(auto fptr = trackspos.lookup(&line.at(pos+2))) {
-        cout<<ip<<" match!"<<endl;
-        ((TrackerConf*)fptr)->counter++;
+      else if(auto fptr = trackspos.lookup(ip.c_str())) {
+	auto ptr = (TrackerConf*)fptr;
+        cout<<ip<<" match ("<<ptr->name<<")"<<endl;
+        ptr->counter++;
       }
     }
 
