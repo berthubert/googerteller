@@ -26,3 +26,4 @@ add_custom_command(
     DEPENDS  teller.conf trackers.conf
 )
 
+install(TARGETS teller)
