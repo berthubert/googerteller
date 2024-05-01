@@ -37,7 +37,7 @@ FreeBSD).
 
 You need a C++ compiler like `gcc-c++` and CMake for compiling the binary.
 
-You also need to install `libpcaudio` (`libpcaudio-dev` on Debian/Ubuntu, `pcaudiolib-devel` on Fedora/Red Hat).
+You also need to install `libpcaudio` (`libpcaudio-dev` on Debian/Ubuntu, `pcaudiolib-devel` on Fedora/Red Hat, `pcaudiolib` on Arch/Manjaro).
 For OSX [this is a bit more work](https://github.com/espeak-ng/pcaudiolib#mac-os)
 
 Then do:
